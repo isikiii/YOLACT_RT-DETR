@@ -44,7 +44,10 @@ Some examples from our YOLACT base model (33.5 fps on a Titan Xp and 29.8 mAP on
        ```Shell
        # Cython needs to be installed before pycocotools
        pip install cython
-       pip install opencv-python pillow pycocotools matplotlib 
+       pip install opencv-python pillow pycocotools matplotlib
+       # Additional packages required for YolactRTDETR
+       # (see external/rtdetr_pytorch/requirements.txt)
+       pip install onnx==1.14.0 onnxruntime==1.15.1 PyYAML scipy transformers
        ```
  - If you'd like to train YOLACT, download the COCO dataset and the 2014/2017 annotations. Note that this script will take a while and dump 21gb of files into `./data/coco`.
    ```Shell
@@ -80,6 +83,10 @@ YOLACT++ models (released on December 16th, 2019):
 | 550        | Resnet101-FPN | 27.3 | 34.6 | [yolact_plus_base_54_800000.pth](https://drive.google.com/file/d/15id0Qq5eqRbkD-N3ZjDZXdCvRyIaHpFB/view?usp=sharing) | [Mirror](https://ucdavis365-my.sharepoint.com/:u:/g/personal/yongjaelee_ucdavis_edu/EVQ62sF0SrJPrl_68onyHF8BpG7c05A8PavV4a849sZgEA)
 
 To evalute the model, put the corresponding weights file in the `./weights` directory and run one of the following commands. The name of each config is everything before the numbers in the file name (e.g., `yolact_base` for `yolact_base_54_800000.pth`).
+If you have a YolactRTDETR weight file, evaluation is invoked the same way:
+```Shell
+python eval.py --trained_model=weights/your_rtdetr_weights.pth
+```
 ## Quantitative Results on COCO
 ```Shell
 # Quantitatively evaluate a trained model on the entire validation set. Make sure you have COCO downloaded as above.
